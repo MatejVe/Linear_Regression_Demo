@@ -103,7 +103,7 @@ def main():
     
     def add_dot(x, y):
         new_dot = {'x': x, 'y': y}
-        st.session_state.new_dots_df = st.session_state.new_dots_df.append(new_dot, ignore_index=True)
+        st.session_state.new_dots_df = pd.concat([st.session_state.new_dots_df, pd.DataFrame(new_dot, index=[0])], ignore_index=True)
     
     def remove_last_dot():
         st.session_state.new_dots_df = st.session_state.new_dots_df.iloc[:-1]
@@ -122,7 +122,7 @@ def main():
         st.session_state.model.fit(X, y)
         
         # Add the new points to the old ones
-        st.session_state.dots_df = st.session_state.dots_df.append(st.session_state.new_dots_df, ignore_index=True)
+        st.session_state.dots_df = pd.concat([st.session_state.dots_df, st.session_state.new_dots_df], ignore_index=True)
         # Reset the new points
         st.session_state.new_dots_df = pd.DataFrame(columns=['x', 'y'])
         

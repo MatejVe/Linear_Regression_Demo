@@ -118,11 +118,14 @@ class UpdateDist:
         
         self.line.set_data(self.x, y_pred)
         self.points.set_data(x_obs, y_obs)
-        self.axl.collections.clear()
-        self.axl.fill_between(self.x.flatten(), y_pred-pi, y_pred+pi, alpha=0.2, color='orange', label=r'$1\sigma$ PI')
+        self.confidence.remove()
+        self.confidence = self.axl.fill_between(self.x.flatten(), y_pred-pi, y_pred+pi, alpha=0.2, color='orange', label=r'$1\sigma$ PI')
+        #self.axl.collections.clear()
+        #self.axl.fill_between(self.x.flatten(), y_pred-pi, y_pred+pi, alpha=0.2, color='orange', label=r'$1\sigma$ PI')
         
         # Replot the contour plot
-        self.axr.collections.clear()
+        #self.axr.collections.clear()
+        self.axr.cla()
         x, y = np.mgrid[self.a-1:self.a+1:.01, self.b-1:self.b+1:.01]
         pos = np.dstack((x, y))
         rv = multivariate_normal(self.br.prior_mean, self.br.prior_cov)
