@@ -9,6 +9,7 @@ pandas = "*"
 numpy = "*"
 matplotlib = "*"
 scipy = "*"
+importlib-resources = "*"
 
 [dev-packages]
 
